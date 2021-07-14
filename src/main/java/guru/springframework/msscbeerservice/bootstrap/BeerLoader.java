@@ -4,11 +4,12 @@ import guru.springframework.msscbeerservice.domain.Beer;
 import guru.springframework.msscbeerservice.repository.BeerRepository;
 import guru.springframework.msscbeerservice.web.model.BeerStyleEnum;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
-//@Component - Using Data.sql to load data now
+@Component
 public class BeerLoader implements CommandLineRunner {
 
     public static final String BEER_1_UPC = "0631234200036";
@@ -26,7 +27,9 @@ public class BeerLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // loadBeerObjects();
+        if (beerRepository.count()== 0){
+            loadBeerObjects();
+        }
     }
 
     private void loadBeerObjects() {
@@ -61,6 +64,6 @@ public class BeerLoader implements CommandLineRunner {
         beerRepository.save(b2);
         beerRepository.save(b3);
 
-        System.out.println("Loaded 3");
+        System.out.println("Empty database : loaded 3 Beers on Startup");
     }
 }
