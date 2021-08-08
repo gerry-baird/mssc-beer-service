@@ -1,8 +1,8 @@
 package guru.springframework.msscbeerservice.bootstrap;
 
+import guru.sfg.brewery.model.BeerStyleEnum;
 import guru.springframework.msscbeerservice.domain.Beer;
 import guru.springframework.msscbeerservice.repository.BeerRepository;
-import guru.springframework.msscbeerservice.web.model.BeerStyleEnum;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -28,7 +28,12 @@ public class BeerLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if (beerRepository.count()== 0){
-            loadBeerObjects();
+
+            //Don't need this anymore, when the service starts it will check
+            //all the beers, calling the inventory service for each beer
+            //For any beer below the desired stock level it will create BrewBeer events.
+            //This will cause new beer to be brewed and added to the inventory
+            //loadBeerObjects();
         }
     }
 
